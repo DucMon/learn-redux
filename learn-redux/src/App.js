@@ -1,25 +1,61 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
-
-class App extends Component {
+import React from "react";
+import { Button } from "reactstrap";
+class App extends React.Component {
+  state = {
+    counter: 0,
+    color: "black"
+  };
+  handleOnclickIncre() {
+    this.setState(prev => ({
+      counter: ++prev.counter
+    }));
+  }
+  handleOnclickDecre() {
+    this.setState(prev => ({
+      counter: --prev.counter
+    }));
+  }
+  handleOnclickChaCo() {
+    this.setState(prev => ({
+      color: prev.color === "black" ? "white" : "black"
+    }));
+  }
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
+      <div className="text-center relative">
+        <div
+          className="counter bg-danger"
+          style={{ display: "inline-block", width: "100%" }}
+        >
+          <h1>Counter</h1>
+          <h3 style={{ color: this.state.color }}>{this.state.counter}</h3>
+        </div>
+
+        <div className="controller bg-dark p-3">
+          <div className="controller--changecolor ">
+            <Button
+              outline
+              color="success"
+              onClick={() => this.handleOnclickChaCo()}
+            >
+              Changecolor
+            </Button>
+          </div>
+          <Button
+            outline
+            color="primary"
+            onClick={() => this.handleOnclickIncre()}
           >
-            Learn React
-          </a>
-        </header>
+            Incre
+          </Button>{" "}
+          <Button
+            outline
+            color="secondary"
+            onClick={() => this.handleOnclickDecre()}
+          >
+            Decre
+          </Button>{" "}
+        </div>
       </div>
     );
   }
